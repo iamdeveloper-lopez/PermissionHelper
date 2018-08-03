@@ -1,6 +1,24 @@
 # PermissionHelper
 PermissionHelper helps developer to handle runtime permissions
 
+[![](https://jitpack.io/v/iamdeveloper-lopez/PermissionHelper.svg)](https://jitpack.io/#iamdeveloper-lopez/PermissionHelper)
+
+## Gradle
+```
+allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+}
+```
+```
+dependencies {
+        implementation 'com.github.iamdeveloper-lopez:PermissionHelper:0.0.1'
+}
+```
+
+
 # License
 Copyright 2018 Lester Lopez
 
