@@ -39,7 +39,8 @@ PermissionHelper.Builder builder = new PermissionHelper.Builder(this/* Activity 
  Manifest.permission.ACCESS_FINE_LOCATION, 
  Manifest.permission.WRITE_EXTERNAL_STORAGE, 
  Manifest.permission.READ_EXTERNAL_STORAGE)//Add all permissions you want to check with runtime 
-.requestCode(1000)//provide request code for checking later on onRequestPermissionsResult method .setPermissionListener((PermissionHelper.RequestPermissionRationaleListener) permissionsNeedRationale -> { 
+.requestCode(1000)//provide request code for checking later on onRequestPermissionsResult method
+.setPermissionListener((PermissionHelper.RequestPermissionRationaleListener) permissionsNeedRationale -> { 
 	 //All permissions that need rationale //Do Something 
  }) 
  .setPermissionListener(new PermissionHelper.RequestPermissionListener() { 
