@@ -53,7 +53,8 @@ PermissionHelper.Builder builder = new PermissionHelper.Builder(this/* Activity 
 		 permissionHelper.check();//if permission is denied you can put checker here so that RequestPermissionRationaleListener will call 
 	 } 
  }); 
- permissionHelper = builder.build();//Build the builder permissionHelper.check();//This will check permission and popup an runtime permission  
+ permissionHelper = builder.build();//Build the builder 
+ permissionHelper.check();//This will check permission and popup an runtime permission  
  ```
 Inside onRequestPermissionsResult pass all values to PermissionHelper to check for the permissions by request code you've provided  
 ```
