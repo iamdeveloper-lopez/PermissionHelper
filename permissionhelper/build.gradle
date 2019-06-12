@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
-        versionName "0.0.1"
+        versionName "0.0.2"
     }
 
     buildTypes {
@@ -15,10 +15,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:27.1.1'
+//    api 'com.android.support:support-v4:27.1.1'
+    ext.appCompatVersion = '1.0.2'
+    api "androidx.appcompat:appcompat:${ext.appCompatVersion}"
+    ext.supportLibVersion = '1.0.0'
+    api "androidx.annotation:annotation:${ext.supportLibVersion}"
+    api "androidx.legacy:legacy-support-v4:${ext.supportLibVersion}"
+
 }
