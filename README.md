@@ -20,7 +20,7 @@ allprojects {
 ```  
 ```  
 dependencies {  
-	 implementation 'com.github.iamdeveloper-lopez:PermissionHelper:0.0.1'
+	 implementation 'com.github.iamdeveloper-lopez:PermissionHelper:0.0.2'
  }  
 ```  
   
