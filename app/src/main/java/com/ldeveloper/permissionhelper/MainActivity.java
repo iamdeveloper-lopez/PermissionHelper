@@ -2,10 +2,13 @@ package com.ldeveloper.permissionhelper;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
-import com.permissionhelper.PermissionHelper;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.permissionhelper.v1.PermissionHelper;
+import com.permissionhelper.v2.Permission;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,36 +19,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PermissionHelper.Builder builder = new PermissionHelper.Builder(this)
-                .addPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
+//        PermissionHelper.Builder builder = new PermissionHelper.Builder(this)
+//                .permissions(Manifest.permission.ACCESS_COARSE_LOCATION,
+//                        Manifest.permission.ACCESS_FINE_LOCATION,
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE)
+//                .requestCode(1000)
+//                .setPermissionListener((PermissionHelper.RequestPermissionRationaleListener) permissionsNeedRationale -> {
+//                    //All permissions that need rationale
+//                    //Do Something
+//                })
+//                .setPermissionListener(new PermissionHelper.RequestPermissionListener() {
+//                    @Override
+//                    public void permissionsGranted() {
+//                        //All permissions granted
+//                        //Do Something
+//                    }
+//
+//                    @Override
+//                    public void permissionsDenied() {
+//                        permissionHelper.check();
+//                    }
+//                });
+//        permissionHelper = builder.build();
+//        permissionHelper.check();
+
+        Permission.with(this)
+                .requestCode(1000)
+                .permissions(Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
-                .requestCode(1000)
-                .setPermissionListener((PermissionHelper.RequestPermissionRationaleListener) permissionsNeedRationale -> {
-                    //All permissions that need rationale
-                    //Do Something
+                .permissionListener((Permission.RequestPermissionRationaleListener) permissionsNeedRationale -> {
+                    Permission.showDeniedPermissionDialog(this, permissionsNeedRationale);
                 })
-                .setPermissionListener(new PermissionHelper.RequestPermissionListener() {
+                .permissionListener(new Permission.RequestPermissionListener() {
                     @Override
                     public void permissionsGranted() {
-                        //All permissions granted
-                        //Do Something
+                        Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void permissionsDenied() {
-                        permissionHelper.check();
+                        Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                        Permission.permit();
                     }
                 });
-        permissionHelper = builder.build();
-        permissionHelper.check();
+        Permission.permit();
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Permission.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
